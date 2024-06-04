@@ -1,0 +1,15 @@
+C:\Users\kkata\Desktop\Salonbeauty\bin\Debug\net8.0\Salonbeauty.exe
+C:\Users\kkata\Desktop\Salonbeauty\bin\Debug\net8.0\Salonbeauty.deps.json
+C:\Users\kkata\Desktop\Salonbeauty\bin\Debug\net8.0\Salonbeauty.runtimeconfig.json
+C:\Users\kkata\Desktop\Salonbeauty\bin\Debug\net8.0\Salonbeauty.dll
+C:\Users\kkata\Desktop\Salonbeauty\bin\Debug\net8.0\Salonbeauty.pdb
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.AssemblyInfoInputs.cache
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.AssemblyInfo.cs
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.csproj.CoreCompileInputs.cache
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.sourcelink.json
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.dll
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\refint\Salonbeauty.dll
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.pdb
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\Salonbeauty.genruntimeconfig.cache
+C:\Users\kkata\Desktop\Salonbeauty\obj\Debug\net8.0\ref\Salonbeauty.dll

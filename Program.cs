@@ -5,23 +5,43 @@
 
         class User
         {
-            private string? name;
-            private string? email;
-            private string? phoneNumber;
-            private string? password;
+            private string name, email, phoneNumber, password;
+            
+
+            public User(string name, string email, string phoneNumber, string password)
+            {
+                this.name = name;
+                this.email = email;
+                this.phoneNumber = phoneNumber;
+                this.password = password;
+            }
         }
 
         class Service
         {
-            private string? serviceType;
-            private string? details;
+            private string serviceType, details;
+
+            public Service(string serviceType, string details)
+            {
+                this.serviceType = serviceType;
+                this.details = details;
+            }
+
+
         }
 
         class Booking
         {
-            private User? user;
-            private Service? service;
-            private DateTime bookingDateTime;
+            private User user; Service service; DateTime bookingDateTime;
+            
+
+            public Booking(User user, Service service, DateTime bookingDateTime)
+            {
+                this.user = user;
+                this.service = service;
+                this.bookingDateTime = bookingDateTime;
+            }
+
         }
 
         class SalonSystem

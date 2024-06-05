@@ -17,7 +17,7 @@
             }
 
             // Properties to access private members
-            public string Name
+           /* public string Name
             {
                 get { return name; }
                 set { name = value; }
@@ -39,7 +39,7 @@
             {
                 get { return password; }
                 set { password = value; }
-            }
+            }*/
         }
 
         class Service
@@ -50,6 +50,18 @@
             {
                 this.serviceType = serviceType;
                 this.details = details;
+            }
+
+            public string ServiceType
+            {
+                get { return serviceType; }
+                set { serviceType = value; }
+            }
+
+            public string Details
+            {
+                get { return details; }
+                set { details = value; }
             }
 
 
@@ -119,6 +131,8 @@
                     string phoneNumber = Console.ReadLine();
                     Console.Write("Enter your password: ");
                     string password = Console.ReadLine();
+
+                    User newUser = new User(name, email, phoneNumber, password);
 
                 }
 

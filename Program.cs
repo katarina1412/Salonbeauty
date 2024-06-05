@@ -19,7 +19,7 @@ namespace Salonbeauty
             }
 
             // Properties to access private members
-           /* public string Name
+            public string Name
             {
                 get { return name; }
                 set { name = value; }
@@ -41,7 +41,7 @@ namespace Salonbeauty
             {
                 get { return password; }
                 set { password = value; }
-            }*/
+            }
         }
 
         class Service
@@ -93,6 +93,12 @@ namespace Salonbeauty
             public List<User> Users
             {
                 get { return users; }
+            }
+
+            public User? LoggedInUser
+            {
+                get { return loggedInUser; }
+                set { loggedInUser = value; }
             }
 
             public SalonSystem()
@@ -149,7 +155,27 @@ namespace Salonbeauty
                  else if (choice == "2")
                 {
                     //NYI Login
-                }
+                    Console.Write("Enter your email: ");
+                    string email = Console.ReadLine();
+                    Console.Write("Enter your password: ");
+                    string password = Console.ReadLine();
+
+                    // Checking users in the system
+                    // FirstOrDefault
+                    //Lambda
+                    User user = salonSystem.Users.FirstOrDefault(user => user.Email == email);
+
+                    if (user != null)
+                    {
+                        salonSystem.LoggedInUser = user;
+                        Console.WriteLine("Login successful.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid email or password. Please try again.");
+                    }
+                
+            }
 
                  else if (choice == "3")
                 {

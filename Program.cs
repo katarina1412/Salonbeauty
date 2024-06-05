@@ -46,12 +46,21 @@
 
         class SalonSystem
         {
-            private User? user;
-            //Register
-            //Login
-            //BookService
-            //Viewbookedservice
-            //Cancelbooking
+            private List<User> users;
+            private List<Service> services;
+            private List<Booking> bookings;
+            private User? loggedInUser;
+
+            public SalonSystem()
+            {
+                users = new List<User>();
+                services = new List<Service>();
+                bookings = new List<Booking>();
+                loggedInUser = null;
+
+                
+            }
+
         }
         static void Main(string[] args)
         {
@@ -76,7 +85,15 @@
 
                 if (choice == "1")
                 {
-                    //NYI Registration
+                    //TODO finish registration 
+                    Console.Write("Enter your name: ");
+                    string name = Console.ReadLine();
+                    Console.Write("Enter your email: ");
+                    string email = Console.ReadLine();
+                    Console.Write("Enter your phone number: ");
+                    string phoneNumber = Console.ReadLine();
+                    Console.Write("Enter your password: ");
+                    string password = Console.ReadLine();
 
                 }
 

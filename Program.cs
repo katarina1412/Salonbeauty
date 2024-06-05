@@ -1,4 +1,6 @@
-﻿namespace Salonbeauty
+﻿using System.Xml.Linq;
+
+namespace Salonbeauty
 {
     internal class Program
     {
@@ -52,7 +54,7 @@
                 this.details = details;
             }
 
-            public string ServiceType
+           /* public string ServiceType
             {
                 get { return serviceType; }
                 set { serviceType = value; }
@@ -62,7 +64,7 @@
             {
                 get { return details; }
                 set { details = value; }
-            }
+            }*/
 
 
         }
@@ -88,6 +90,11 @@
             private List<Booking> bookings;
             private User? loggedInUser;
 
+            public List<User> Users
+            {
+                get { return users; }
+            }
+
             public SalonSystem()
             {
                 users = new List<User>();
@@ -97,15 +104,16 @@
 
                 
             }
-
+           
         }
         static void Main(string[] args)
         {
 
             
             Console.WriteLine("Welcome to the Beauty Salon!");
-            
-            
+            SalonSystem salonSystem = new SalonSystem();
+
+
             bool running = true;
             while (running)
             {
@@ -133,6 +141,8 @@
                     string password = Console.ReadLine();
 
                     User newUser = new User(name, email, phoneNumber, password);
+                    salonSystem.Users.Add(newUser);
+                    Console.WriteLine("Registration successful.");
 
                 }
 

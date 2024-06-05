@@ -56,40 +56,58 @@
         static void Main(string[] args)
         {
 
-            //TODO welcome message
+            
             Console.WriteLine("Welcome to the Beauty Salon!");
-            //TODO user registration/login
-            Console.WriteLine("Please register or login.");
-            //NYI register/login
-            //TODO MENU
+            
+            
             bool running = true;
             while (running)
             {
                 Console.WriteLine("Choose an option:");
-                Console.WriteLine("1. Book a service");
-                Console.WriteLine("2. View booked services");
-                Console.WriteLine("3. Cancel a booking");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("1. Register");
+                Console.WriteLine("2. Login");
+                Console.WriteLine("3. Book a service");
+                Console.WriteLine("4. View booked services");
+                Console.WriteLine("5. Cancel a booking");
+                Console.WriteLine("6. Exit");
 
                 
                 string choice = Console.ReadLine();
-                switch (choice)
+
+                if (choice == "1")
                 {
-                    case "1":
-                        // TODO Reservation
-                        break;
-                    case "2":
-                        // TODO reservation view
-                        break;
-                    case "3":
-                        // TODO cancellation of reservation
-                        break;
-                    case "4":
-                        running = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice. Please try again.");
-                        break;
+                    //NYI Registration
+
+                }
+
+                 else if (choice == "2")
+                {
+                    //NYI Login
+                }
+
+                 else if (choice == "3")
+                {
+                    //NYI book a service 
+                }
+
+                 else if (choice == "4")
+                {
+               
+                    //NYI View booked services
+                }
+                 else  if (choice == "5")
+                {
+                    //NYI  Cancel a booking
+                }
+
+                 else  if (choice == "6")
+                {
+                    //NYI  Exit
+                }
+
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please try again.");
                 }
             }
 

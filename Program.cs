@@ -15,6 +15,31 @@
                 this.phoneNumber = phoneNumber;
                 this.password = password;
             }
+
+            // Properties to access private members
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+
+            public string Email
+            {
+                get { return email; }
+                set { email = value; }
+            }
+
+            public string PhoneNumber
+            {
+                get { return phoneNumber; }
+                set { phoneNumber = value; }
+            }
+
+            public string Password
+            {
+                get { return password; }
+                set { password = value; }
+            }
         }
 
         class Service

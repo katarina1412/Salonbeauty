@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using System.Linq;
 
 namespace Salonbeauty
 {
@@ -80,6 +81,21 @@ namespace Salonbeauty
                 this.service = service;
                 this.bookingDateTime = bookingDateTime;
             }
+            // dodate javne metode omogucavaju oristum privatnim clanovima klase
+            public User GetUser()
+            {
+                return user;
+            }
+
+            public Service GetService()
+            {
+                return service;
+            }
+
+            public DateTime GetBookingDateTime()
+            {
+                return bookingDateTime;
+            }
 
         }
 
@@ -130,6 +146,7 @@ namespace Salonbeauty
             
             Console.WriteLine("Welcome to the Beauty Salon!");
             SalonSystem salonSystem = new SalonSystem();
+            
             //NEW adding services to the sitem
             salonSystem.Services.Add(new Service("Manicure", "Basic manicure service"));
             salonSystem.Services.Add(new Service("Manicure", "Strengthening nails"));
@@ -181,6 +198,7 @@ namespace Salonbeauty
                     // FirstOrDefault
                     //Lambda
                     User user = salonSystem.Users.FirstOrDefault(user => user.Email == email);
+                   
 
                     if (user != null)
                     {
@@ -243,13 +261,36 @@ namespace Salonbeauty
 
                     //NYI View booked services
                     // if user is logged in
+                    if (salonSystem.LoggedInUser == null)
+                    {
+                        Console.WriteLine("You must be logged in to view booked services.");
+                        continue;
+                    }
                     //show all bookings for the logged in user
+                   
+
+                    Console.WriteLine("Your booked services:");
+                    foreach (var booking in salonSystem.Bookings)
+                    {
+                        if (booking.GetUser() == salonSystem.LoggedInUser)
+                        {
+                            Console.WriteLine($"{booking.GetService().ServiceType} - {booking.GetService().Details} at {booking.GetBookingDateTime()}");
+                        }
+                    }
+
+
                     //display service type, details, and booking date and time
                 }
                 else  if (choice == "5")
                 {
                     //NYI  Cancel a booking
                     // if user is logged in
+                    if (salonSystem.LoggedInUser == null)
+                    {
+                        Console.WriteLine("You must be logged in to view booked services.");
+                        continue;
+                    }
+                  
                     //show all bookings for the logged in user
                     //allow user to select a booking to cancel
                     //remove the selected booking from the list

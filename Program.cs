@@ -194,7 +194,9 @@ namespace Salonbeauty
 
                  else  if (choice == "6")
                 {
-                    //NYI  Exit
+                   
+                    Console.WriteLine("Exiting the program. Goodbye!");
+                    break;
                 }
 
                 else

@@ -140,6 +140,22 @@ namespace Salonbeauty
             }
            
         }
+
+        static void RegisterUser(SalonSystem salonSystem)
+        {
+            Console.Write("Enter your name: ");
+            string name = Console.ReadLine();
+            Console.Write("Enter your email: ");
+            string email = Console.ReadLine();
+            Console.Write("Enter your phone number: ");
+            string phoneNumber = Console.ReadLine();
+            Console.Write("Enter your password: ");
+            string password = Console.ReadLine();
+
+            User newUser = new User(name, email, phoneNumber, password);
+            salonSystem.Users.Add(newUser);
+            Console.WriteLine("Registration successful.");
+        }
         static void Main(string[] args)
         {
 
@@ -170,19 +186,8 @@ namespace Salonbeauty
 
                 if (choice == "1")
                 {
-                    //TODO finish registration 
-                    Console.Write("Enter your name: ");
-                    string name = Console.ReadLine();
-                    Console.Write("Enter your email: ");
-                    string email = Console.ReadLine();
-                    Console.Write("Enter your phone number: ");
-                    string phoneNumber = Console.ReadLine();
-                    Console.Write("Enter your password: ");
-                    string password = Console.ReadLine();
 
-                    User newUser = new User(name, email, phoneNumber, password);
-                    salonSystem.Users.Add(newUser);
-                    Console.WriteLine("Registration successful.");
+                    RegisterUser(salonSystem);
 
                 }
 

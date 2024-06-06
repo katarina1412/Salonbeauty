@@ -54,7 +54,7 @@ namespace Salonbeauty
                 this.details = details;
             }
 
-           /* public string ServiceType
+            public string ServiceType
             {
                 get { return serviceType; }
                 set { serviceType = value; }
@@ -64,7 +64,7 @@ namespace Salonbeauty
             {
                 get { return details; }
                 set { details = value; }
-            }*/
+            }
 
 
         }
@@ -95,6 +95,13 @@ namespace Salonbeauty
                 get { return users; }
             }
 
+            // added
+
+            public List<Service> Services
+            {
+                get { return services; }
+            }
+
             public User? LoggedInUser
             {
                 get { return loggedInUser; }
@@ -118,6 +125,11 @@ namespace Salonbeauty
             
             Console.WriteLine("Welcome to the Beauty Salon!");
             SalonSystem salonSystem = new SalonSystem();
+            //NEW adding services to the sitem
+            salonSystem.Services.Add(new Service("Manicure", "Basic manicure service"));
+            salonSystem.Services.Add(new Service("Manicure", "Strengthening nails"));
+            salonSystem.Services.Add(new Service("Pedicure", "Pedicure"));
+
 
 
             bool running = true;
@@ -179,7 +191,9 @@ namespace Salonbeauty
 
                  else if (choice == "3")
                 {
-                    //NYI book a service 
+                    //NYI book a service
+                    
+                   
                 }
 
                  else if (choice == "4")

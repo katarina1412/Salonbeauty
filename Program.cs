@@ -101,6 +101,11 @@ namespace Salonbeauty
             {
                 get { return services; }
             }
+            //added
+            public List<Booking> Bookings
+            {
+                get { return bookings; }
+            }
 
             public User? LoggedInUser
             {
@@ -191,19 +196,49 @@ namespace Salonbeauty
 
                  else if (choice == "3")
                 {
-                    //NYI book a service
-                    // if user is logged in
-                    //show available service
-                    //service selection
-                    //date and time for reservation
-                    //new reservation
-                  
-                    
-                    
                    
+                    // if user is logged in
+                    if (salonSystem.LoggedInUser == null)
+                    {
+                        Console.WriteLine("You must be logged in to book a service.");
+                        continue;
+                    }
+                    //show available service
+                    Console.WriteLine("Available services:");
+                    for (int i = 0; i < salonSystem.Services.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {salonSystem.Services[i].ServiceType} - {salonSystem.Services[i].Details}");
+                    }
+
+                    //service selection
+                    Console.Write("Enter the number of the service you want to book: ");
+                    int serviceChoice = int.Parse(Console.ReadLine());
+                    if (serviceChoice < 1 || serviceChoice > salonSystem.Services.Count)
+                    {
+                        Console.WriteLine("Invalid service choice. Please try again.");
+                        continue;
+                    }
+                    Service selectedService = salonSystem.Services[serviceChoice - 1];
+                    //date and time for reservation
+                    Console.Write("Enter the date and time for the booking (yyyy-MM-dd HH:mm): ");
+                    DateTime bookingDateTime;
+                    if (!DateTime.TryParse(Console.ReadLine(), out bookingDateTime))
+                    {
+                        Console.WriteLine("Invalid date and time format. Please try again.");
+                        continue;
+                    }
+                    //new reservation
+                    Booking newBooking = new Booking(salonSystem.LoggedInUser, selectedService, bookingDateTime);
+                    salonSystem.Bookings.Add(newBooking);
+
+                    Console.WriteLine("Service booked successfully.");
+
+
+
+
                 }
 
-                 else if (choice == "4")
+                else if (choice == "4")
                 {
 
                     //NYI View booked services

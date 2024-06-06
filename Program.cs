@@ -166,7 +166,7 @@ namespace Salonbeauty
 
                  else if (choice == "2")
                 {
-                    //NYI Login
+                    
                     Console.Write("Enter your email: ");
                     string email = Console.ReadLine();
                     Console.Write("Enter your password: ");
@@ -192,21 +192,35 @@ namespace Salonbeauty
                  else if (choice == "3")
                 {
                     //NYI book a service
+                    // if user is logged in
+                    //show available service
+                    //service selection
+                    //date and time for reservation
+                    //new reservation
+                  
+                    
                     
                    
                 }
 
                  else if (choice == "4")
                 {
-               
+
                     //NYI View booked services
+                    // if user is logged in
+                    //show all bookings for the logged in user
+                    //display service type, details, and booking date and time
                 }
-                 else  if (choice == "5")
+                else  if (choice == "5")
                 {
                     //NYI  Cancel a booking
+                    // if user is logged in
+                    //show all bookings for the logged in user
+                    //allow user to select a booking to cancel
+                    //remove the selected booking from the list
                 }
 
-                 else  if (choice == "6")
+                else  if (choice == "6")
                 {
                    
                     Console.WriteLine("Exiting the program. Goodbye!");

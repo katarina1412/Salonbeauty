@@ -279,7 +279,7 @@ namespace Salonbeauty
                     }
 
 
-                    //display service type, details, and booking date and time
+                   
                 }
                 else  if (choice == "5")
                 {
@@ -290,10 +290,46 @@ namespace Salonbeauty
                         Console.WriteLine("You must be logged in to view booked services.");
                         continue;
                     }
-                  
+
                     //show all bookings for the logged in user
+
+                    Console.WriteLine("Your booked services:");
+                    int index = 1;
+                    foreach (var booking in salonSystem.Bookings)
+                    {
+                        if (booking.GetUser() == salonSystem.LoggedInUser)
+                        {
+                            Console.WriteLine($"{index}. {booking.GetService().ServiceType} - {booking.GetService().Details} at {booking.GetBookingDateTime()}");
+                            index++;
+                        }
+                    }
                     //allow user to select a booking to cancel
-                    //remove the selected booking from the list
+                    Console.Write("Enter the number of the booking you want to cancel: ");
+                    int bookingChoice = int.Parse(Console.ReadLine());
+                    if (bookingChoice < 1 || bookingChoice >= index)
+                    {
+                        Console.WriteLine("Invalid booking choice. Please try again.");
+                        continue;
+                    }
+                    //find reservation
+                    index = 1;
+                    Booking bookingToRemove = null;
+                    foreach (var booking in salonSystem.Bookings)
+                    {
+                        if (booking.GetUser() == salonSystem.LoggedInUser)
+                        {
+                            if (index == bookingChoice)
+                            {
+                                bookingToRemove = booking;
+                                break;
+                            }
+                            index++;
+                        }
+                    }
+
+                    // Remove reservation
+                    salonSystem.Bookings.Remove(bookingToRemove);
+                    Console.WriteLine("Booking canceled successfully.");
                 }
 
                 else  if (choice == "6")

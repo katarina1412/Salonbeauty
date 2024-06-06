@@ -156,6 +156,27 @@ namespace Salonbeauty
             salonSystem.Users.Add(newUser);
             Console.WriteLine("Registration successful.");
         }
+
+        static void LoginUser(SalonSystem salonSystem)
+        {
+            Console.Write("Enter your email: ");
+            string email = Console.ReadLine();
+            Console.Write("Enter your password: ");
+            string password = Console.ReadLine();
+            // FirstOrDefault
+            //Lambda
+            User user = salonSystem.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+
+            if (user != null)
+            {
+                salonSystem.LoggedInUser = user;
+                Console.WriteLine("Login successful.");
+            }
+            else
+            {
+                Console.WriteLine("Invalid email or password. Please try again.");
+            }
+        }
         static void Main(string[] args)
         {
 
@@ -193,29 +214,10 @@ namespace Salonbeauty
 
                  else if (choice == "2")
                 {
-                    
-                    Console.Write("Enter your email: ");
-                    string email = Console.ReadLine();
-                    Console.Write("Enter your password: ");
-                    string password = Console.ReadLine();
 
-                    // Checking users in the system
-                    // FirstOrDefault
-                    //Lambda
-                    User user = salonSystem.Users.FirstOrDefault(user => user.Email == email);
-                   
+                    LoginUser(salonSystem);
 
-                    if (user != null)
-                    {
-                        salonSystem.LoggedInUser = user;
-                        Console.WriteLine("Login successful.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid email or password. Please try again.");
-                    }
-                
-            }
+                 }
 
                  else if (choice == "3")
                 {

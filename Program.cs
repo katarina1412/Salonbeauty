@@ -293,11 +293,23 @@ namespace Salonbeauty
                 Console.WriteLine("Booking canceled successfully.");
             }
         }
+
+        static void ShowMenu()
+        {
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1. Register");
+            Console.WriteLine("2. Login");
+            Console.WriteLine("3. Book a service");
+            Console.WriteLine("4. View booked services");
+            Console.WriteLine("5. Cancel a booking");
+            Console.WriteLine("6. Exit");
+        }
         static void Main(string[] args)
         {
 
             
             Console.WriteLine("Welcome to the Beauty Salon!");
+            Console.WriteLine("Write 'help' for help!");
             SalonSystem salonSystem = new SalonSystem();
             
             //NEW adding services to the sitem
@@ -310,16 +322,16 @@ namespace Salonbeauty
             bool running = true;
             while (running)
             {
-                Console.WriteLine("Choose an option:");
-                Console.WriteLine("1. Register");
-                Console.WriteLine("2. Login");
-                Console.WriteLine("3. Book a service");
-                Console.WriteLine("4. View booked services");
-                Console.WriteLine("5. Cancel a booking");
-                Console.WriteLine("6. Exit");
+               
 
                 
                 string choice = Console.ReadLine();
+
+                if (choice.ToLower() == "help")
+                {
+                    ShowMenu();
+                    choice = Console.ReadLine();
+                }
 
                 if (choice == "1")
                 {

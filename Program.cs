@@ -1,5 +1,7 @@
 ﻿using System.Xml.Linq;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Net;
 
 namespace Salonbeauty
 {
@@ -150,8 +152,18 @@ namespace Salonbeauty
                 Console.WriteLine("Invalid name. Name must contain only letters.");
                 return;
             }
-            Console.Write("Enter your email: ");
-            string email = Console.ReadLine();
+            string email;
+
+            do
+            {
+                Console.Write("Enter your email: ");
+                email = Console.ReadLine();
+                if (!ValidEmail(email))
+                {
+                    Console.WriteLine("Invalid email address.");
+                }
+            } while (!ValidEmail(email)); // Repeat the entry until the email is valid.
+
 
             Console.Write("Enter your phone number: ");
             string phoneNumber = Console.ReadLine();
@@ -316,6 +328,13 @@ namespace Salonbeauty
             Console.WriteLine("6. Exit");
         }
 
+        static bool ValidEmail(string email)
+        {
+            // Regular Expression to Check the Validity of an E - Mail Address
+            //@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, emailPattern);
+        }
         static bool ValidName(string name)
         {
             return name.All(char.IsLetter);

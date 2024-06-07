@@ -145,10 +145,21 @@ namespace Salonbeauty
         {
             Console.Write("Enter your name: ");
             string name = Console.ReadLine();
+            if (!ValidName(name))
+            {
+                Console.WriteLine("Invalid name. Name must contain only letters.");
+                return;
+            }
             Console.Write("Enter your email: ");
             string email = Console.ReadLine();
+
             Console.Write("Enter your phone number: ");
             string phoneNumber = Console.ReadLine();
+            if (!ValidPhoneNumber(phoneNumber))
+            {
+                Console.WriteLine("Invalid phone number. Phone number must contain only numbers.");
+                return;
+            }
             Console.Write("Enter your password: ");
             string password = Console.ReadLine();
 
@@ -304,6 +315,16 @@ namespace Salonbeauty
             Console.WriteLine("5. Cancel a booking");
             Console.WriteLine("6. Exit");
         }
+
+        static bool ValidName(string name)
+        {
+            return name.All(char.IsLetter);
+        }
+
+        static bool ValidPhoneNumber(string phoneNumber)
+        {
+            return phoneNumber.All(char.IsDigit);
+        }
         static void Main(string[] args)
         {
 
@@ -320,6 +341,7 @@ namespace Salonbeauty
 
 
             bool running = true;
+           
             while (running)
             {
                
@@ -330,6 +352,7 @@ namespace Salonbeauty
                 if (choice.ToLower() == "help")
                 {
                     ShowMenu();
+                   
                     choice = Console.ReadLine();
                 }
 

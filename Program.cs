@@ -164,14 +164,17 @@ namespace Salonbeauty
                 }
             } while (!ValidEmail(email)); // Repeat the entry until the email is valid.
 
-
-            Console.Write("Enter your phone number: ");
-            string phoneNumber = Console.ReadLine();
-            if (!ValidPhoneNumber(phoneNumber))
+            string phoneNumber;
+            do
             {
-                Console.WriteLine("Invalid phone number. Phone number must contain only numbers.");
-                return;
-            }
+                Console.Write("Enter your phone number: ");
+                phoneNumber = Console.ReadLine();
+                if (!ValidPhoneNumber(phoneNumber))
+                {
+                    Console.WriteLine("Invalid phone number. Phone number must contain only numbers.");
+                }
+            } while (!ValidPhoneNumber(phoneNumber)); // Ponovi unos dok broj telefona nije validan.
+
             Console.Write("Enter your password: ");
             string password = Console.ReadLine();
 

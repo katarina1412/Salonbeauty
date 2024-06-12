@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Net;
+using System.IO;
 
 namespace Salonbeauty
 {
@@ -103,6 +104,8 @@ namespace Salonbeauty
 
         class SalonSystem
         {
+            private const string UsersFilePath = "users.txt";
+
             private List<User> users;
             private List<Service> services;
             private List<Booking> bookings;
@@ -133,14 +136,45 @@ namespace Salonbeauty
 
             public SalonSystem()
             {
-                users = new List<User>();
+                // users = new List<User>();
+                users = LoadUsers();//poziva metodu load users
                 services = new List<Service>();
                 bookings = new List<Booking>();
                 loggedInUser = null;
 
                 
             }
-           
+            
+            // Loading the user from a text file
+            private List<User> LoadUsers()
+            {
+                List<User> users = new List<User>();
+                if (File.Exists(UsersFilePath)) 
+                {
+                    string[] lines = File.ReadAllLines(UsersFilePath);
+                    
+                    foreach (string line in lines)
+                    {
+                        string[] data = line.Split(',');
+                        if (data.Length == 4)
+                        {
+                            users.Add(new User(data[0], data[1], data[2], data[3]));
+                        }
+                    }
+                }
+                return users;
+            }
+            // save user 
+            public void SaveUsers()
+            {
+                var lines = new List<string>();
+                foreach (var user in Users)
+                {
+                    lines.Add($"{user.Name},{user.Email},{user.PhoneNumber},{user.Password}");
+                }
+                File.WriteAllLines(UsersFilePath, lines);
+            }
+
         }
 
         static void RegisterUser(SalonSystem salonSystem)
@@ -180,6 +214,8 @@ namespace Salonbeauty
 
             User newUser = new User(name, email, phoneNumber, password);
             salonSystem.Users.Add(newUser);
+            //added 
+            salonSystem.SaveUsers();
             Console.WriteLine("Registration successful.");
         }
 

@@ -314,14 +314,20 @@ namespace Salonbeauty
             //show all bookings for the logged in user
             Console.WriteLine("Your booked services:");
             int index = 1;
-            foreach (var booking in salonSystem.Bookings)
+            var userBookings = salonSystem.Bookings.Where(booking => booking.GetUser() == salonSystem.LoggedInUser).ToList();
+
+            if (userBookings.Count == 0)
             {
-                if (booking.GetUser() == salonSystem.LoggedInUser)
-                {
-                    Console.WriteLine($"{index}. {booking.GetService().ServiceType} - {booking.GetService().Details} at {booking.GetBookingDateTime()}");
-                    index++;
-                }
+                Console.WriteLine("You have no booked services.");
+                return;
             }
+
+            foreach (var booking in userBookings)
+            {
+                Console.WriteLine($"{index}. {booking.GetService().ServiceType} - {booking.GetService().Details} at {booking.GetBookingDateTime()}");
+                index++;
+            }
+           
 
             //allow user to select a booking to cancel
             Console.Write("Enter the number of the booking you want to cancel: ");

@@ -140,7 +140,7 @@ namespace Salonbeauty
                 // users = new List<User>();
                 users = LoadUsers();//poziva metodu load users
                 services = new List<Service>();
-                bookings = new List<Booking>();
+                bookings =  LoadBookings();
                 loggedInUser = null;
 
                 
@@ -174,6 +174,37 @@ namespace Salonbeauty
                     lines.Add($"{user.Name},{user.Email},{user.PhoneNumber},{user.Password}");
                 }
                 File.WriteAllLines(UsersFilePath, lines);
+            }
+
+            private List<Booking> LoadBookings()
+            {
+                List<Booking> loadedBookings = new List<Booking>();
+                if (File.Exists(BookingsFilePath))
+                {
+                    string[] lines = File.ReadAllLines(BookingsFilePath);
+                    foreach (string line in lines)
+                    {
+                        string[] data = line.Split(',');
+                        if (data.Length == 5)
+                        {
+                            User user = users.FirstOrDefault(u => u.Email == data[0]);
+                            Service service = new Service(data[1], data[2]);
+                            DateTime bookingDateTime = DateTime.Parse(data[3]);
+                            loadedBookings.Add(new Booking(user, service, bookingDateTime));
+                        }
+                    }
+                }
+                return loadedBookings;
+            }
+
+            private void SaveBookings()
+            {
+                var lines = new List<string>();
+                foreach (var booking in bookings)
+                {
+                    lines.Add($"{booking.GetUser().Email},{booking.GetService().ServiceType},{booking.GetService().Details},{booking.GetBookingDateTime()}");
+                }
+                File.WriteAllLines(BookingsFilePath, lines);
             }
 
         }

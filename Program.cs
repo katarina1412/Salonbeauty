@@ -349,10 +349,21 @@ namespace Salonbeauty
             }
 
             // Remove reservation
+           
             if (bookingToRemove != null)
             {
-                salonSystem.Bookings.Remove(bookingToRemove);
-                Console.WriteLine("Booking canceled successfully.");
+                Console.Write($"Are you sure you want to cancel the booking for {bookingToRemove.GetService().ServiceType} at {bookingToRemove.GetBookingDateTime()}? (yes/no): ");
+                string confirmation = Console.ReadLine();
+
+                if (confirmation.ToLower() == "yes")
+                {
+                    salonSystem.Bookings.Remove(bookingToRemove);
+                    Console.WriteLine("Booking canceled successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Cancellation aborted.");
+                }
             }
         }
 
@@ -447,7 +458,7 @@ namespace Salonbeauty
 
                 else  if (choice == "6")
                 {
-                   
+                    salonSystem.SaveUsers();
                     Console.WriteLine("Exiting the program. Goodbye!");
                     break;
                 }
@@ -461,3 +472,4 @@ namespace Salonbeauty
         }
     }
 }
+

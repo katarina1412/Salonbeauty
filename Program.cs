@@ -105,6 +105,7 @@ namespace Salonbeauty
         class SalonSystem
         {
             private const string UsersFilePath = "users.txt";
+            private const string BookingsFilePath = "bookings.txt";
 
             private List<User> users;
             private List<Service> services;
@@ -371,6 +372,8 @@ namespace Salonbeauty
                     Console.WriteLine("Cancellation aborted.");
                 }
             }
+
+           
         }
 
         static void ShowMenu()

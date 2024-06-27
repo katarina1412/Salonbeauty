@@ -137,7 +137,7 @@ namespace Salonbeauty
 
             public SalonSystem()
             {
-                // users = new List<User>();
+                
                 users = LoadUsers();//poziva metodu load users
                 services = new List<Service>();
                 bookings =  LoadBookings();
@@ -176,6 +176,8 @@ namespace Salonbeauty
                 File.WriteAllLines(UsersFilePath, lines);
             }
 
+           
+
             private List<Booking> LoadBookings()
             {
                 List<Booking> loadedBookings = new List<Booking>();
@@ -185,19 +187,26 @@ namespace Salonbeauty
                     foreach (string line in lines)
                     {
                         string[] data = line.Split(',');
-                        if (data.Length == 5)
+                        if (data.Length == 4)
                         {
                             User user = users.FirstOrDefault(u => u.Email == data[0]);
-                            Service service = new Service(data[1], data[2]);
-                            DateTime bookingDateTime = DateTime.Parse(data[3]);
-                            loadedBookings.Add(new Booking(user, service, bookingDateTime));
+                            if (user != null)
+                            {
+                                Service service = new Service(data[1], data[2]);
+                                DateTime bookingDateTime = DateTime.Parse(data[3]);
+                                loadedBookings.Add(new Booking(user, service, bookingDateTime));
+                            }
                         }
                     }
                 }
+                bookings = loadedBookings;
                 return loadedBookings;
             }
 
-            private void SaveBookings()
+
+
+
+            public  void SaveBookings()
             {
                 var lines = new List<string>();
                 foreach (var booking in bookings)
@@ -272,9 +281,11 @@ namespace Salonbeauty
             }
         }
 
+       
+
         static void BookService(SalonSystem salonSystem)
         {
-            // Provjera da li je korisnik prijavljen
+            // Provera da li je korisnik prijavljen
             if (salonSystem.LoggedInUser == null)
             {
                 Console.WriteLine("You must be logged in to book a service.");
@@ -282,7 +293,7 @@ namespace Salonbeauty
             }
 
             // Prikaz dostupnih usluga
-            Console.WriteLine("Available services:");
+            Console.WriteLine("Available services::");
             for (int i = 0; i < salonSystem.Services.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {salonSystem.Services[i].ServiceType} - {salonSystem.Services[i].Details}");
@@ -298,7 +309,7 @@ namespace Salonbeauty
             }
             Service selectedService = salonSystem.Services[serviceChoice - 1];
 
-            // Datum i vrijeme rezervacije
+            // Unos datuma i vremena rezervacije
             Console.Write("Enter the date and time for the booking (yyyy-MM-dd HH:mm): ");
             DateTime bookingDateTime;
             if (!DateTime.TryParse(Console.ReadLine(), out bookingDateTime))
@@ -307,11 +318,29 @@ namespace Salonbeauty
                 return;
             }
 
-            // Kreiranje nove rezervacije
-            Booking newBooking = new Booking(salonSystem.LoggedInUser, selectedService, bookingDateTime);
-            salonSystem.Bookings.Add(newBooking);
+            // Provera dostupnosti
+            bool isAvailable = true;
+            foreach (var booking in salonSystem.Bookings)
+            {
+                if (booking.GetBookingDateTime() == bookingDateTime)
+                {
+                    isAvailable = false;
+                    break;
+                }
+            }
 
-            Console.WriteLine("Service booked successfully.");
+            // Ako je dostupno, kreiranje nove rezervacije
+            if (isAvailable)
+            {
+                Booking newBooking = new Booking(salonSystem.LoggedInUser, selectedService, bookingDateTime);
+                salonSystem.Bookings.Add(newBooking);
+                salonSystem.SaveBookings();
+                Console.WriteLine("The service has been successfully booked.");
+            }
+            else
+            {
+                Console.WriteLine("The selected time is not available. Please select another time.");
+            }
         }
 
         static void ViewBookedServices(SalonSystem salonSystem)
@@ -325,15 +354,25 @@ namespace Salonbeauty
 
             // Prikaz svih rezervacija za prijavljenog korisnika
             Console.WriteLine("Your booked services:");
+            bool foundBookings = false; // Dodajte ovu varijablu za proveru da li su pronađene rezervacije
+
             foreach (var booking in salonSystem.Bookings)
             {
-                if (booking.GetUser() == salonSystem.LoggedInUser)
+                if (booking.GetUser().Email == salonSystem.LoggedInUser.Email)
                 {
                     Console.WriteLine($"{booking.GetService().ServiceType} - {booking.GetService().Details} at {booking.GetBookingDateTime()}");
+                    foundBookings = true;
                 }
             }
+
+            if (!foundBookings)
+            {
+                Console.WriteLine("You have no booked services.");
+            }
+            
         }
 
+        
         static void CancelBooking(SalonSystem salonSystem)
         {
             // if user is not  logged in
@@ -396,6 +435,8 @@ namespace Salonbeauty
                 if (confirmation.ToLower() == "yes")
                 {
                     salonSystem.Bookings.Remove(bookingToRemove);
+                    salonSystem.SaveBookings();
+
                     Console.WriteLine("Booking canceled successfully.");
                 }
                 else
@@ -499,6 +540,7 @@ namespace Salonbeauty
                 else  if (choice == "6")
                 {
                     salonSystem.SaveUsers();
+                    salonSystem.SaveBookings();
                     Console.WriteLine("Exiting the program. Goodbye!");
                     break;
                 }
